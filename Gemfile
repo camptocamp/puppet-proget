@@ -30,6 +30,7 @@ group :development do
   gem "puppet-resource_api",                           require: false
   gem "nokogiri",                                      require: false
   gem "savon",                                         require: false
+  gem "coveralls",                                     require: false
 end
 
 puppet_version = ENV['PUPPET_GEM_VERSION']

@@ -6,5 +6,9 @@ Gemfile:
       - gem: 'puppet-resource_api'
       - gem: 'nokogiri'
       - gem: 'savon'
+      - gem: 'coveralls'
 spec/spec_helper.rb:
   mock_with: ':rspec'
+  spec_overrides:
+    - "require 'coveralls'"
+    - "Coveralls.wear!"
