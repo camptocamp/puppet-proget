@@ -7,7 +7,7 @@ require 'nokogiri'
 class Puppet::Provider::ProgetFeed::ProgetFeed < Puppet::ResourceApi::SimpleProvider
   def get(context)
     context.debug('Returning pre-canned example data')
-    xml_feeds = Nokogiri::XML(get_feeds(context))
+    xml_feeds = Nokogiri::XML(feeds)
     xml_feeds.xpath('//Feeds').map do |f|
       {
         name: f.xpath('Feed_Name').text,
@@ -18,8 +18,8 @@ class Puppet::Provider::ProgetFeed::ProgetFeed < Puppet::ResourceApi::SimpleProv
     end
   end
 
-  def get_feeds(context)
-    client.call(:feeds_get_feeds, message: { 'API_Key' => api_key})
+  def feeds
+    client.call(:feeds_get_feeds, message: { 'API_Key' => api_key })
   end
 
   def config
@@ -40,7 +40,7 @@ class Puppet::Provider::ProgetFeed::ProgetFeed < Puppet::ResourceApi::SimpleProv
   end
 
   def client
-    client ||= Savon.client(wsdl: server_url)
+    @client ||= Savon.client(wsdl: server_url)
   end
 
   def create(context, name, should)
