@@ -9,10 +9,12 @@ RSpec.describe Puppet::Provider::ProgetFeed::ProgetFeed do
   let(:context) { instance_double('Puppet::ResourceApi::BaseContext', 'context') }
 
   let(:feed_list) do
-    File.read(File.join(
-      File.dirname(__FILE__),
-      '../../../../fixtures/unit/puppet/provider/proget_feed/get_feeds.xml'
-    ))
+    File.read(
+      File.join(
+        File.dirname(__FILE__),
+        '../../../../fixtures/unit/puppet/provider/proget_feed/get_feeds.xml',
+      ),
+    )
   end
 
   describe '#get' do

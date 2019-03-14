@@ -6,11 +6,11 @@ class Puppet::Provider::ProgetFeed::ProgetFeed < Puppet::ResourceApi::SimpleProv
   def get(context)
     context.debug('Returning pre-canned example data')
     xml_feeds = Nokogiri::XML(get_feeds(context))
-    xml_feeds.xpath("//Feeds").map do |f|
+    xml_feeds.xpath('//Feeds').map do |f|
       {
-        :name   => f.xpath("Feed_Name").text,
-        :id     => f.xpath("Feed_Id").text.to_i,
-        :ensure => 'present',
+        name: f.xpath('Feed_Name').text,
+        id: f.xpath('Feed_Id').text.to_i,
+        ensure: 'present',
       }
     end
   end
