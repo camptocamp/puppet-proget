@@ -1,4 +1,6 @@
 require 'puppet/resource_api/simple_provider'
+require 'puppet/util/inifile'
+require 'savon'
 require 'nokogiri'
 
 # Implementation for the proget_feed type using the Resource API.
@@ -17,7 +19,28 @@ class Puppet::Provider::ProgetFeed::ProgetFeed < Puppet::ResourceApi::SimpleProv
   end
 
   def get_feeds(context)
-    # TODO: implement with soap/REST
+    client.call(:feeds_get_feeds, message: { 'API_Key' => api_key})
+  end
+
+  def config
+    unless @conf
+      path = "#{Puppet[:confdir]}/proget.ini"
+      @conf = Puppet::Util::IniConfig::PhysicalFile.new(path)
+      @conf.read
+    end
+    @conf
+  end
+
+  def server_url
+    config.get_section('server')['url']
+  end
+
+  def api_key
+    config.get_section('api')['key']
+  end
+
+  def client
+    client ||= Savon.client(wsdl: server_url)
   end
 
   def create(context, name, should)

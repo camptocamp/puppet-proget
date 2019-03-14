@@ -20,7 +20,8 @@ RSpec.describe Puppet::Provider::ProgetFeed::ProgetFeed do
   describe '#get' do
     it 'processes resources' do
       expect(context).to receive(:debug).with('Returning pre-canned example data')
-      expect(provider).to receive(:get_feeds).with(context).and_return(feed_list)
+      expect(Puppet).to receive(:[]).with(:confdir).and_return(File.join(File.dirname(__FILE__), '../../../../fixtures/unit/puppet/provider/proget_feed'))
+      expect_any_instance_of(Savon::Client).to receive(:call).with(:feeds_get_feeds, message: { 'API_Key' => 'abcd' }).and_return(feed_list)
       expect(provider.get(context)).to eq [
         {
           name: 'PROGET-IAASTEAM-DEV',
