@@ -1,19 +1,21 @@
 require 'puppet/resource_api/simple_provider'
+require 'nokogiri'
 
 # Implementation for the proget_feed type using the Resource API.
 class Puppet::Provider::ProgetFeed::ProgetFeed < Puppet::ResourceApi::SimpleProvider
   def get(context)
     context.debug('Returning pre-canned example data')
-    [
+    xml_feeds = Nokogiri::XML(get_feeds(context))
+    xml_feeds.xpath("//Feeds").map do |f|
       {
-        name: 'foo',
-        ensure: 'present',
-      },
-      {
-        name: 'bar',
-        ensure: 'present',
-      },
-    ]
+        :name => f.xpath("Feed_Name").text,
+        :ensure => 'present',
+      }
+    end
+  end
+
+  def get_feeds(context)
+    # TODO: implement with soap/REST
   end
 
   def create(context, name, should)

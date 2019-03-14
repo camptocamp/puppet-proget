@@ -8,16 +8,40 @@ RSpec.describe Puppet::Provider::ProgetFeed::ProgetFeed do
 
   let(:context) { instance_double('Puppet::ResourceApi::BaseContext', 'context') }
 
+  let(:feed_list) do
+    File.read(File.join(
+      File.dirname(__FILE__),
+      '../../../../fixtures/unit/puppet/provider/proget_feed/get_feeds.xml'
+    ))
+  end
+
   describe '#get' do
     it 'processes resources' do
       expect(context).to receive(:debug).with('Returning pre-canned example data')
+      expect(provider).to receive(:get_feeds).with(context).and_return(feed_list)
       expect(provider.get(context)).to eq [
         {
-          name: 'foo',
+          name: 'PROGET-IAASTEAM-DEV',
           ensure: 'present',
         },
         {
-          name: 'bar',
+          name: 'PROGET-IAASTEAM-EXP',
+          ensure: 'present',
+        },
+        {
+          name: 'PROGET-IAASTEAM-NONPROD',
+          ensure: 'present',
+        },
+        {
+          name: 'PROGET-IAASTEAM-PROD',
+          ensure: 'present',
+        },
+        {
+          name: 'PROGET-IAASTEAM-QA',
+          ensure: 'present',
+        },
+        {
+          name: 'PROGET-IAASTEAM-TEST',
           ensure: 'present',
         },
       ]
