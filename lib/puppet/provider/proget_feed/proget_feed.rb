@@ -10,6 +10,7 @@ class Puppet::Provider::ProgetFeed::ProgetFeed < Puppet::ResourceApi::SimpleProv
       {
         name: f.xpath('Feed_Name').text,
         id: f.xpath('Feed_Id').text.to_i,
+        type: f.xpath('FeedType_Name').text,
         ensure: 'present',
       }
     end

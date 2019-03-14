@@ -25,31 +25,37 @@ RSpec.describe Puppet::Provider::ProgetFeed::ProgetFeed do
         {
           name: 'PROGET-IAASTEAM-DEV',
           id: 1,
+          type: 'Chocolatey',
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-EXP',
           id: 2,
+          type: 'Chocolatey',
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-NONPROD',
           id: 3,
+          type: 'Chocolatey',
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-PROD',
           id: 5,
+          type: 'Chocolatey',
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-QA',
           id: 4,
+          type: 'Chocolatey',
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-TEST',
           id: 6,
+          type: 'Nugget',
           ensure: 'present',
         },
       ]
