@@ -8,7 +8,8 @@ class Puppet::Provider::ProgetFeed::ProgetFeed < Puppet::ResourceApi::SimpleProv
     xml_feeds = Nokogiri::XML(get_feeds(context))
     xml_feeds.xpath("//Feeds").map do |f|
       {
-        :name => f.xpath("Feed_Name").text,
+        :name   => f.xpath("Feed_Name").text,
+        :id     => f.xpath("Feed_Id").text.to_i,
         :ensure => 'present',
       }
     end

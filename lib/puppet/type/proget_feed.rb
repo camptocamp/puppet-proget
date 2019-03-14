@@ -17,6 +17,11 @@ Puppet::ResourceApi.register_type(
       desc:      'The name of the feed.',
       behaviour: :namevar,
     },
+    id: {
+      type:      'Integer',
+      desc:      'The ID of the feed.',
+      behaviour: :read_only,
+    },
     type: {
       type:      'Enum[nugget, chocolatey]',
       desc:      'The type of package feed.',

@@ -22,26 +22,32 @@ RSpec.describe Puppet::Provider::ProgetFeed::ProgetFeed do
       expect(provider.get(context)).to eq [
         {
           name: 'PROGET-IAASTEAM-DEV',
+          id: 1,
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-EXP',
+          id: 2,
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-NONPROD',
+          id: 3,
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-PROD',
+          id: 5,
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-QA',
+          id: 4,
           ensure: 'present',
         },
         {
           name: 'PROGET-IAASTEAM-TEST',
+          id: 6,
           ensure: 'present',
         },
       ]
